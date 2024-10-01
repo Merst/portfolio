@@ -1,0 +1,37 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>My projects</h1>
+
+  This is a list of the projects I've recently been working on.
+  {% if project_list %}
+  <div class="accordion" id="projectAccordion">
+    {% for project in project_list %}
+      <div class="accordion-item">
+        <!-- TODO: Dynamic header id -->
+        <h2 class="accordion-header" id="project{{ forloop.counter }}">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+            Project #{{ forloop.counter }}: {{project.title}}
+          </button>
+        </h2>
+        <!-- Collapsible body -->
+        <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse show" aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#projectAccordion">
+          <div class="accordion-body">
+            <p> 
+              {{project.summary}}
+              <br>
+              Tech used: {{project.skill.all}}
+              <br>
+              Repo link: <a href="{{project.github_link}}"> {{project.github_link}} </a>
+              
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  
+  {% else %}
+    <p>No projects were currently submitted.</p>
+  {% endif %}
+{% endblock %}
