@@ -14,6 +14,7 @@ class Project(models.Model):
     skill = models.ManyToManyField(Skill, help_text='Select the appropriate related technical skills')
     summary = models.TextField(max_length=2500, help_text='Enter a brief description of the project')
     github_link = models.URLField()
+    older_project = models.BooleanField(default=False)
     
     def __str__(self):
         """String for representing the Model object."""

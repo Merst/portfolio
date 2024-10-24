@@ -1,37 +1,40 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>My projects</h1>
-
-  This is a list of the projects I've recently been working on.
   {% if project_list %}
-  <div class="accordion" id="projectAccordion">
-    {% for project in project_list %}
-      <div class="accordion-item">
-        <!-- TODO: Dynamic header id -->
-        <h2 class="accordion-header" id="project{{ forloop.counter }}">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
-            Project #{{ forloop.counter }}: {{project.title}}
-          </button>
-        </h2>
-        <!-- Collapsible body -->
-        <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse show" aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#projectAccordion">
-          <div class="accordion-body">
+    <h1>Recent projects </h1>
+    These are some of the projects that I've been working on since 2022, generally in order to learn and apply new concepts studied.
+
+      {% for project in project_list %}
+        {% if not project.older_project%}
+          <h2> {{project.title}} </h2>
+          <p> 
+            {{project.summary}}
+            <br>
+            Tech used: {{project.skill.all}}
+            <br>
+            Repo link: <a href="{{project.github_link}}"> {{project.github_link}} </a>   
+          </p>
+        {% endif %}
+      {% endfor %}
+      
+    <h1> Older projects </h1>
+    These are some of the projects that I've worked on during my college years:
+
+      {% for project in project_list %}
+        {% if project.older_project %}
+          <h2> {{project.title}} </h2>
             <p> 
               {{project.summary}}
               <br>
               Tech used: {{project.skill.all}}
               <br>
-              Repo link: <a href="{{project.github_link}}"> {{project.github_link}} </a>
-              
+              Repo link: <a href="{{project.github_link}}"> {{project.github_link}} </a>   
             </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-  
+        {% endif %}
+      {% endfor %}
+
   {% else %}
-    <p>No projects were currently submitted.</p>
+    <p>No projects were added to the database.</p>
   {% endif %}
 {% endblock %}
