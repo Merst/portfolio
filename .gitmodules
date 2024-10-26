@@ -1,0 +1,6 @@
+[submodule "portfolio_frontend"]
+	path = portfolio_frontend
+	url = https://github.com/Merst/portfolio_frontend.git
+[submodule "portfolio_backend"]
+	path = portfolio_backend
+	url = https://github.com/Merst/portfolio_backend.git
