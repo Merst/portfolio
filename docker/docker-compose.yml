@@ -27,5 +27,3 @@ services:
       - "88:80"
     depends_on:
       - portfolio_api
-
- 
